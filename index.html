@@ -121,21 +121,6 @@
             color: #074983;
             margin-top: 20px;
         }
-
-        .checkbox-group {
-            text-align: left;
-            margin: 20px 0;
-        }
-
-        .checkbox-group label {
-            display: block;
-            margin: 5px 0;
-            cursor: pointer;
-        }
-
-        .checkbox-group input[type="radio"] {
-            margin-right: 10px;
-        }
     </style>
 </head>
 <body>
@@ -146,52 +131,94 @@
 
         <h1>Encuesta de Analítica de Datos</h1>
 
-        <!-- Pregunta 1: Rol o contexto profesional -->
+        <!-- Pregunta 1: Rol principal -->
         <div id="question1" class="question active">
-            <p>¿En qué contexto profesional te desenvuelves habitualmente?</p>
-            <button class="primary" onclick="handleAnswer('rol','Analista de datos','question2',20)">👤 Analista de datos</button>
-            <button class="primary" onclick="handleAnswer('rol','Responsable de negocio','question2',20)">👤 Responsable de negocio</button>
-            <button class="primary" onclick="handleAnswer('rol','Marketing o Ventas','question2',20)">👤 Marketing o Ventas</button>
-            <button class="primary" onclick="handleAnswer('rol','Consultor o Freelance','question2',20)">👤 Consultor o Freelance</button>
-            <button class="primary" onclick="handleAnswer('rol','Otro ámbito','question2',20)">👤 Otro ámbito</button>
+            <p>¿Cuál describe mejor tu rol profesional principal?</p>
+            <button class="primary" onclick="chooseRole('Analista técnico')">👤 Analista técnico</button>
+            <button class="primary" onclick="chooseRole('Responsable de negocio')">👤 Responsable de negocio</button>
+            <button class="primary" onclick="chooseRole('Marketing/Ventas')">👤 Marketing/Ventas</button>
+            <button class="primary" onclick="chooseRole('Consultor/Freelance')">👤 Consultor/Freelance</button>
+            <button class="primary" onclick="chooseRole('Otro ámbito')">👤 Otro ámbito</button>
         </div>
 
-        <!-- Pregunta 2: Tipo de proyectos -->
-        <div id="question2" class="question">
-            <p>¿Qué tipo de proyectos o informes deseas crear con estas herramientas?</p>
-            <button class="primary" onclick="handleAnswer('proyecto','Informes financieros','question3',40)">💼 Informes financieros</button>
-            <button class="primary" onclick="handleAnswer('proyecto','Dashboards de ventas','question3',40)">📊 Dashboards de ventas</button>
-            <button class="primary" onclick="handleAnswer('proyecto','Análisis de marketing','question3',40)">📈 Análisis de marketing</button>
-            <button class="primary" onclick="handleAnswer('proyecto','Optimizar procesos internos','question3',40)">⚙️ Optimizar procesos</button>
-            <button class="primary" onclick="handleAnswer('proyecto','Otro tipo de análisis','question3',40)">🔍 Otro tipo de análisis</button>
+        <!-- Camino Analista Técnico / Consultor: Elección de herramienta principal -->
+        <div id="questionTechLevel" class="question">
+            <p>¿Con qué herramienta te sientes más cómodo trabajando datos?</p>
+            <button class="primary" onclick="handleAnswer('herramienta','Power BI','questionTechPowerBI',40)">🛠 Power BI</button>
+            <button class="primary" onclick="handleAnswer('herramienta','SQL','questionTechSQL',40)">🛠 SQL</button>
+            <button class="primary" onclick="handleAnswer('herramienta','Python','questionTechPython',40)">🛠 Python</button>
+            <button class="primary" onclick="handleAnswer('herramienta','Excel/Spreadsheets','questionTechExcel',40)">🛠 Excel/Spreadsheets</button>
         </div>
 
-        <!-- Pregunta 3: Principal desafío -->
-        <div id="question3" class="question">
-            <p>¿Cuál consideras que es tu mayor desafío al trabajar con datos?</p>
-            <button class="primary" onclick="handleAnswer('desafio','Limpieza y preparación de datos','question4',60)">🧼 Limpieza de datos</button>
-            <button class="primary" onclick="handleAnswer('desafio','Modelado del conjunto de datos','question4',60)">🔧 Modelado</button>
-            <button class="primary" onclick="handleAnswer('desafio','Cálculos avanzados (DAX)','question4',60)">🧮 Cálculos avanzados</button>
-            <button class="primary" onclick="handleAnswer('desafio','Creación de visualizaciones claras','question4',60)">🎨 Visualización</button>
-            <button class="primary" onclick="handleAnswer('desafio','Contar historias con los datos (Storytelling)','question4',60)">📚 Storytelling</button>
+        <!-- Preguntas para Power BI (técnico) -->
+        <div id="questionTechPowerBI" class="question">
+            <p>¿Cuál es tu mayor reto con Power BI?</p>
+            <button class="primary" onclick="handleAnswer('desafio','DAX','questionTime',60)">🧮 DAX</button>
+            <button class="primary" onclick="handleAnswer('desafio','Modelado de datos','questionTime',60)">🔧 Modelado</button>
+            <button class="primary" onclick="handleAnswer('desafio','Visualizaciones','questionTime',60)">🎨 Visualización</button>
+            <button class="primary" onclick="handleAnswer('desafio','Optimización rendimiento','questionTime',60)">⚡ Rendimiento</button>
         </div>
 
-        <!-- Pregunta 4: Tiempo disponible -->
-        <div id="question4" class="question">
-            <p>¿Cuánto tiempo a la semana puedes dedicar a aprender nuevas habilidades?</p>
-            <button class="primary" onclick="handleAnswer('tiempo','Menos de 2 horas','question5',80)">⏰ Menos de 2 horas</button>
-            <button class="primary" onclick="handleAnswer('tiempo','Entre 2 y 5 horas','question5',80)">⏰ Entre 2 y 5 horas</button>
-            <button class="primary" onclick="handleAnswer('tiempo','Más de 5 horas','question5',80)">⏰ Más de 5 horas</button>
+        <!-- Preguntas para SQL -->
+        <div id="questionTechSQL" class="question">
+            <p>¿Qué nivel de consultas SQL necesitas dominar?</p>
+            <button class="primary" onclick="handleAnswer('desafio','Consultas básicas y JOINS','questionTime',60)">🔧 Básico/Intermedio</button>
+            <button class="primary" onclick="handleAnswer('desafio','Consultas complejas y optimización','questionTime',60)">⚡ Avanzado</button>
         </div>
 
-        <!-- Pregunta 5: Objetivo principal -->
-        <div id="question5" class="question">
-            <p>¿Cuál es tu objetivo principal al formarte en análisis de datos?</p>
+        <!-- Preguntas para Python -->
+        <div id="questionTechPython" class="question">
+            <p>¿Qué tipo de análisis con Python te interesa más?</p>
+            <button class="primary" onclick="handleAnswer('desafio','Estadística básica','questionTime',60)">📊 Estadística</button>
+            <button class="primary" onclick="handleAnswer('desafio','Análisis con librerías (pandas, matplotlib)','questionTime',60)">🧪 Librerías análisis</button>
+            <button class="primary" onclick="handleAnswer('desafio','Integración con Power BI','questionTime',60)">🔗 Integración con Power BI</button>
+        </div>
+
+        <!-- Preguntas para Excel/Spreadsheets -->
+        <div id="questionTechExcel" class="question">
+            <p>¿Qué buscas lograr con Excel u hojas de cálculo?</p>
+            <button class="primary" onclick="handleAnswer('desafio','Análisis de datos con funciones y tablas dinámicas','questionTime',60)">📈 Análisis clásico</button>
+            <button class="primary" onclick="handleAnswer('desafio','Automatización y preparación de datos','questionTime',60)">⚙️ Automatización</button>
+        </div>
+
+        <!-- Camino Responsable de Negocio / Marketing/Ventas: Tipo de indicadores -->
+        <div id="questionBusinessFocus" class="question">
+            <p>¿Qué tipo de indicadores te resultan más valiosos?</p>
+            <button class="primary" onclick="handleAnswer('indicadores','Financieros (Balance, P&G)','questionBusinessImprovement',40)">💼 Financieros</button>
+            <button class="primary" onclick="handleAnswer('indicadores','Ventas y KPI comerciales','questionBusinessImprovement',40)">📊 Ventas/KPIs</button>
+            <button class="primary" onclick="handleAnswer('indicadores','Métricas de marketing (ROI, CTR)','questionBusinessImprovement',40)">📈 Marketing</button>
+        </div>
+
+        <div id="questionBusinessImprovement" class="question">
+            <p>¿Qué aspecto te gustaría mejorar en el análisis de estos indicadores?</p>
+            <button class="primary" onclick="handleAnswer('mejora','Presentar datos de forma más clara (Storytelling)','questionTime',60)">📚 Storytelling</button>
+            <button class="primary" onclick="handleAnswer('mejora','Profundizar en cálculos avanzados (DAX)','questionTime',60)">🧮 Cálculos avanzados</button>
+            <button class="primary" onclick="handleAnswer('mejora','Crear modelos de datos robustos','questionTime',60)">🔧 Modelado</button>
+        </div>
+
+        <!-- Camino Otro ámbito -->
+        <div id="questionGeneralNeed" class="question">
+            <p>¿Cuál es tu principal objetivo al introducirte en análisis de datos?</p>
+            <button class="primary" onclick="handleAnswer('objetivoGeneral','Aprender desde cero y familiarizarme con las herramientas','questionTime',60)">🆕 Aprender desde cero</button>
+            <button class="primary" onclick="handleAnswer('objetivoGeneral','Aplicar análisis de datos a proyectos personales','questionTime',60)">🎨 Proyectos personales</button>
+            <button class="primary" onclick="handleAnswer('objetivoGeneral','Mejorar mi perfil profesional con nuevas habilidades','questionTime',60)">🚀 Mejora profesional</button>
+        </div>
+
+        <!-- Pregunta tiempo -->
+        <div id="questionTime" class="question">
+            <p>¿Cuánto tiempo a la semana puedes dedicar a formarte?</p>
+            <button class="primary" onclick="handleAnswer('tiempo','Menos de 2 horas','questionFinalGoal',80)">⏰ Menos de 2 horas</button>
+            <button class="primary" onclick="handleAnswer('tiempo','2-5 horas','questionFinalGoal',80)">⏰ 2-5 horas</button>
+            <button class="primary" onclick="handleAnswer('tiempo','Más de 5 horas','questionFinalGoal',80)">⏰ Más de 5 horas</button>
+        </div>
+
+        <!-- Pregunta objetivo final -->
+        <div id="questionFinalGoal" class="question">
+            <p>¿Cuál es tu objetivo principal con la formación?</p>
             <button class="primary" onclick="handleAnswer('objetivo','Obtener certificación (PL-300)','showFinalRec',100)">🎓 Certificación PL-300</button>
-            <button class="primary" onclick="handleAnswer('objetivo','Mejorar la calidad de mis informes','showFinalRec',100)">🌟 Mejorar informes</button>
-            <button class="primary" onclick="handleAnswer('objetivo','Aplicar técnicas avanzadas (DAX, visualización)','showFinalRec',100)">🚀 Técnicas avanzadas</button>
-            <button class="primary" onclick="handleAnswer('objetivo','Optimizar procesos internos de mi empresa','showFinalRec',100)">📂 Optimizar procesos</button>
-            <button class="primary" onclick="handleAnswer('objetivo','Crear proyectos personales y experimentar','showFinalRec',100)">🎨 Proyectos personales</button>
+            <button class="primary" onclick="handleAnswer('objetivo','Crear informes más útiles y atractivos','showFinalRec',100)">🌟 Mejorar informes</button>
+            <button class="primary" onclick="handleAnswer('objetivo','Profundizar en técnicas avanzadas','showFinalRec',100)">🚀 Técnicas avanzadas</button>
+            <button class="primary" onclick="handleAnswer('objetivo','Optimizar mis procesos de análisis','showFinalRec',100)">📂 Optimizar procesos</button>
         </div>
 
         <!-- Recomendación final -->
@@ -207,11 +234,31 @@
     <script>
         const userData = {
             rol: null,
-            proyecto: null,
+            herramienta: null,
             desafio: null,
+            indicadores: null,
+            mejora: null,
+            objetivoGeneral: null,
             tiempo: null,
             objetivo: null
         };
+
+        function chooseRole(role) {
+            userData.rol = role;
+            document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+
+            // Ramificación según rol
+            if(role === 'Analista técnico' || role === 'Consultor/Freelance') {
+                document.getElementById('questionTechLevel').classList.add('active');
+                updateProgress(20);
+            } else if(role === 'Responsable de negocio' || role === 'Marketing/Ventas') {
+                document.getElementById('questionBusinessFocus').classList.add('active');
+                updateProgress(20);
+            } else {
+                document.getElementById('questionGeneralNeed').classList.add('active');
+                updateProgress(20);
+            }
+        }
 
         function handleAnswer(key, value, nextStep, progress) {
             userData[key] = value;
@@ -229,35 +276,51 @@
             const recommendationDiv = document.getElementById('recommendation');
             recommendationDiv.classList.add('active');
 
-            // Lógica simple de recomendación: Combinar las respuestas para sugerir cursos
-            // Esta lógica puede ser mucho más compleja. Aquí se hace un ejemplo básico.
             let recommendedCourses = [];
-            
-            // Ejemplo de lógica: Si el desafío es DAX y el objetivo es técnicas avanzadas
-            if(userData.desafio === 'Cálculos avanzados (DAX)' && userData.objetivo === 'Aplicar técnicas avanzadas (DAX, visualización)') {
-                recommendedCourses.push('📚 Curso de DAX');
-                recommendedCourses.push('📚 Visualizaciones imprescindibles para negocio');
-            } else if(userData.objetivo === 'Obtener certificación (PL-300)') {
-                recommendedCourses.push('📚 Preparatorio para la certificación PL-300');
-                if(userData.desafio === 'Limpieza y preparación de datos' || userData.desafio === 'Modelado del conjunto de datos') {
-                    recommendedCourses.push('📚 Power BI de 0 a 100');
+
+            // Lógica de recomendación (simplificada, se puede ampliar)
+            // Ejemplo: si rol es técnico con Power BI y el desafío es DAX
+            if(userData.rol === 'Analista técnico' || userData.rol === 'Consultor/Freelance') {
+                if(userData.herramienta === 'Power BI' && userData.desafio === 'DAX') {
+                    recommendedCourses.push('📚 Curso de DAX');
+                    if(userData.objetivo === 'Técnicas avanzadas') recommendedCourses.push('📚 Visualizaciones imprescindibles para negocio');
+                } else if(userData.herramienta === 'SQL') {
+                    if(userData.desafio.includes('básicas')) {
+                        recommendedCourses.push('📚 SQL (nivel básico a intermedio)');
+                    } else {
+                        recommendedCourses.push('📚 SQL (consultas avanzadas)');
+                    }
                 }
-            } else if(userData.objetivo === 'Mejorar la calidad de mis informes') {
-                recommendedCourses.push('📚 Visualizaciones imprescindibles para negocio');
-                if(userData.desafio === 'Modelado del conjunto de datos') {
-                    recommendedCourses.push('📚 Modelado de Datos en Power BI');
-                }
-            } else if(userData.objetivo === 'Optimizar procesos internos de mi empresa') {
-                recommendedCourses.push('📚 Fundamentos del lenguaje M');
-                recommendedCourses.push('📚 Bravo para Power BI');
-            } else if(userData.objetivo === 'Crear proyectos personales y experimentar') {
-                recommendedCourses.push('📚 Introducción al análisis de datos');
-                if(userData.desafio === 'Creación de visualizaciones claras') {
+                //... Añadir más condiciones según herramienta y desafío
+            }
+
+            if(userData.rol === 'Responsable de negocio' || userData.rol === 'Marketing/Ventas') {
+                if(userData.mejora === 'Presentar datos de forma más clara (Storytelling)') {
                     recommendedCourses.push('📚 Visualizaciones imprescindibles para negocio');
+                    recommendedCourses.push('📚 Diseño creativo de informes con Figma');
+                } else if(userData.mejora === 'Cálculos avanzados (DAX)') {
+                    recommendedCourses.push('📚 Curso de DAX');
+                } else if(userData.mejora === 'Crear modelos de datos robustos') {
+                    recommendedCourses.push('📚 Modelado de Datos en Power BI');
                 }
             }
 
-            // Mostrar las recomendaciones
+            if(userData.rol === 'Otro ámbito') {
+                if(userData.objetivoGeneral === 'Aprender desde cero y familiarizarme con las herramientas') {
+                    recommendedCourses.push('📚 Power BI de 0 a 100');
+                    recommendedCourses.push('📚 Introducción al análisis de datos');
+                } else if(userData.objetivoGeneral === 'Proyectos personales') {
+                    recommendedCourses.push('📚 Introducción al análisis de datos');
+                } else if(userData.objetivoGeneral === 'Mejorar mi perfil profesional') {
+                    recommendedCourses.push('📚 Preparatorio para la certificación PL-300');
+                }
+            }
+
+            // Si no se han asignado cursos, sugerir algunos por defecto
+            if(recommendedCourses.length === 0) {
+                recommendedCourses = ['📚 Power BI de 0 a 100','📚 Introducción al análisis de datos'];
+            }
+
             const list = document.getElementById('recommendation-list');
             list.innerHTML = '';
             recommendedCourses.forEach(course => {
@@ -266,19 +329,22 @@
                 list.appendChild(p);
             });
 
-            // Mensaje personalizado
             const msgDiv = document.getElementById('personalized-message');
             const message = buildPersonalizedMessage(userData, recommendedCourses);
             msgDiv.innerText = message;
         }
 
         function buildPersonalizedMessage(data, courses) {
-            let texto = "Teniendo en cuenta que te desenvuelves como " + data.rol.toLowerCase();
-            texto += " y quieres trabajar en " + data.proyecto.toLowerCase();
-            texto += ", tu principal reto radica en " + data.desafio.toLowerCase();
-            texto += ". Dado que puedes dedicar " + data.tiempo.toLowerCase() + " a la semana";
-            texto += " y tu objetivo es " + data.objetivo.toLowerCase() + ",";
-            texto += " creemos que estos cursos se ajustarán a lo que necesitas para avanzar.";
+            let texto = "Has indicado que tu rol es " + data.rol.toLowerCase() + ". ";
+            if(data.herramienta) {
+                texto += "Prefieres trabajar con " + data.herramienta + " y tu principal desafío se centra en " + (data.desafio || data.mejora || data.objetivoGeneral).toLowerCase() + ". ";
+            } else if(data.indicadores) {
+                texto += "Te interesan sobre todo indicadores " + data.indicadores.toLowerCase() + " y quieres mejorar en " + data.mejora.toLowerCase() + ". ";
+            } else if(data.objetivoGeneral) {
+                texto += "Tu objetivo principal es " + data.objetivoGeneral.toLowerCase() + ". ";
+            }
+
+            texto += "Dado el tiempo que puedes dedicar (" + (data.tiempo || "no especificado") + ") y tu objetivo final de " + data.objetivo.toLowerCase() + ", creemos que estas recomendaciones te ayudarán a alcanzar tus metas.";
 
             return texto;
         }
@@ -287,11 +353,10 @@
             document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
             document.getElementById('question1').classList.add('active');
             updateProgress(0);
-            userData.rol = null;
-            userData.proyecto = null;
-            userData.desafio = null;
-            userData.tiempo = null;
-            userData.objetivo = null;
+
+            for (let key in userData) {
+                userData[key] = null;
+            }
             document.getElementById('recommendation-list').innerHTML = '';
             document.getElementById('personalized-message').innerText = '';
         }
