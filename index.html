@@ -16,6 +16,10 @@
         }
         .question {
             margin-bottom: 20px;
+            display: none;
+        }
+        .question.active {
+            display: block;
         }
         button {
             padding: 10px 20px;
@@ -37,34 +41,43 @@
 <body>
     <div class="container">
         <h1>Encuesta de Power BI</h1>
-        <form id="survey-form">
-            <div class="question">
-                <p>¿Actualmente trabajas con Power BI?</p>
-                <label>
-                    <input type="radio" name="powerbi" value="Sí" required> Sí
-                </label>
-                <label>
-                    <input type="radio" name="powerbi" value="No" required> No
-                </label>
-            </div>
-            <button type="submit">Enviar</button>
-        </form>
-        <div id="recommendation" class="recommendation"></div>
+        
+        <!-- Pregunta 1 -->
+        <div id="question1" class="question active">
+            <p>¿Actualmente trabajas con Power BI?</p>
+            <button onclick="handleAnswer('Sí', 'question2')">Sí</button>
+            <button onclick="handleAnswer('No', 'question3')">No</button>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div id="question2" class="question">
+            <p>¿Tienes experiencia creando modelos de datos en Power BI?</p>
+            <button onclick="handleAnswer('Sí', 'question4')">Sí</button>
+            <button onclick="handleAnswer('No', 'recommendation', 'Curso recomendado: Introducción a Modelado de Datos')">No</button>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div id="question3" class="question">
+            <p>¿Tienes experiencia con otras herramientas de análisis de datos?</p>
+            <button onclick="handleAnswer('Sí', 'recommendation', 'Curso recomendado: Power BI Intermedio')">Sí</button>
+            <button onclick="handleAnswer('No', 'recommendation', 'Curso recomendado: Power BI 0 a 100')">No</button>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div id="question4" class="question">
+            <p>¿Conoces funciones DAX avanzadas (como CALCULATE o FILTER)?</p>
+            <button onclick="handleAnswer('Sí', 'recommendation', 'Curso recomendado: DAX Avanzado')">Sí</button>
+            <button onclick="handleAnswer('No', 'recommendation', 'Curso recomendado: DAX desde Cero')">No</button>
+        </div>
+
+        <!-- Recomendación -->
+        <div id="recommendation" class="question">
+            <p class="recommendation"></p>
+        </div>
     </div>
     <script>
-        document.getElementById('survey-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const answer = formData.get('powerbi');
-            let recommendation = '';
-            if (answer === 'Sí') {
-                recommendation = 'Te recomendamos el curso "PL300 de NamasData".';
-            } else {
-                recommendation = 'Te recomendamos el curso "Power BI 0 a 100".';
-            }
-            document.getElementById('recommendation').innerText = recommendation;
-
-            // Enviar datos a Google Apps Script
+        function handleAnswer(answer, nextStep, recommendation = '') {
+            // Envía la respuesta a Google Apps Script
             fetch('https://script.google.com/macros/s/AKfycbwydZSlcctofkI1i7S_0CqFIVau5v_gVPEjukbG1jAbX39eZMxpBFCXGwrwVC-1rDYC/exec', {
                 method: 'POST',
                 mode: 'no-cors',
@@ -73,11 +86,18 @@
                 },
                 body: JSON.stringify({ respuesta: answer })
             }).then(() => {
-                console.log('Respuesta enviada correctamente.');
+                console.log('Respuesta enviada: ' + answer);
             }).catch((error) => {
                 console.error('Error al enviar la respuesta:', error);
             });
-        });
+
+            // Maneja la transición de preguntas
+            document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+            if (nextStep === 'recommendation') {
+                document.querySelector('#recommendation .recommendation').innerText = recommendation;
+            }
+            document.getElementById(nextStep).classList.add('active');
+        }
     </script>
 </body>
 </html>
