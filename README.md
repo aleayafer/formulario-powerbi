@@ -60,3 +60,24 @@ Este repositorio contiene un formulario interactivo para segmentar estudiantes y
 ---
 
 ¡Contribuciones y mejoras son bienvenidas! Si tienes sugerencias o encuentras errores, por favor crea un **issue** o envía un **pull request**.
+
+
+
+Dispongo de un formulario modular que recomienda itinerarios formativos basados en las respuestas del usuario. Está dividido en estos archivos:
+
+• index.html (punto de entrada)
+• style.css (estilos)
+• questions.js (define las preguntas, sus opciones, el texto mostrado, el 'next' y el 'progreso')
+• recommendations.js (contiene la lógica para generar recomendaciones finales en base a las respuestas en 'userData')
+• app.js (lógica principal que renderiza preguntas, almacena respuestas, actualiza el progreso y muestra recomendaciones finales)
+
+Quiero que me ayudes a modificar y ampliar el formulario de forma que se añadan nuevas preguntas que influyan en las recomendaciones finales. No voy a escribir el código; quiero que tú produzcas todo el código necesario y me lo muestres completo. Además, quiero que me guíes en el proceso paso a paso. Es decir, primero pídeme el contenido de los archivos que consideres necesarios para entender su estado actual. Una vez que los analices, quiero que me indiques exactamente qué debo cambiar, añadir o eliminar. Finalmente, genera el código completo modificado (index.html, style.css, questions.js, recommendations.js, app.js) con las nuevas preguntas, la nueva lógica de recomendaciones y cualquier otro ajuste requerido.
+
+Ten en cuenta:
+• Yo copiaré y pegaré el contenido de mis archivos cuando tú me lo pidas.
+• Después de analizarlo, quiero que me des el código completo ya modificado. No quiero tener que escribir nada por mi cuenta, solo copiar el nuevo código que tú generes.
+• Guíame de forma clara y directa.
+• Ofrece ejemplos de la nueva lógica y las nuevas preguntas.
+• Asegúrate de que el formulario final resulte funcional y coherente.
+
+¿Entendido?
