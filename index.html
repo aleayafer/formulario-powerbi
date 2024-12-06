@@ -35,6 +35,7 @@
             font-size: 16px;
             font-weight: 400;
             color: #074983;
+            margin-bottom: 20px;
         }
 
         button {
@@ -79,7 +80,6 @@
             opacity: 1;
         }
 
-        /* Barra de progreso */
         .progress-container {
             width: 100%;
             background-color: #EBF2FA;
@@ -97,7 +97,6 @@
             transition: width 0.4s;
         }
 
-        /* Recomendación final */
         #recommendation {
             margin-top: 20px;
         }
@@ -115,7 +114,6 @@
             color: #074983;
         }
 
-        /* Checkbox personalizado */
         .checkbox-group {
             text-align: left;
             margin: 20px 0;
@@ -131,6 +129,13 @@
             margin-right: 10px;
         }
 
+        #personalized-message {
+            background-color: #EBF2FA;
+            padding: 10px;
+            border-radius: 10px;
+            color: #074983;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -141,60 +146,88 @@
 
         <h1>Encuesta de Analítica de Datos</h1>
 
-        <!-- Pregunta 1 -->
+        <!-- Pregunta 1: Nivel de experiencia -->
         <div id="question1" class="question active">
             <p>¿Cuál es tu nivel de experiencia en herramientas de análisis de datos?</p>
-            <button class="primary" onclick="handleAnswer('Ninguna experiencia', 'question2', 25)">Ninguna experiencia</button>
-            <button class="primary" onclick="handleAnswer('Básico', 'question2', 25)">Básico</button>
-            <button class="primary" onclick="handleAnswer('Intermedio', 'question3', 25)">Intermedio</button>
-            <button class="primary" onclick="handleAnswer('Avanzado', 'question3', 25)">Avanzado</button>
+            <button class="primary" onclick="handleAnswer('experiencia','Ninguna experiencia','question2',25)">Ninguna experiencia</button>
+            <button class="primary" onclick="handleAnswer('experiencia','Básico','question2',25)">Básico</button>
+            <button class="primary" onclick="handleAnswer('experiencia','Intermedio','question3',25)">Intermedio</button>
+            <button class="primary" onclick="handleAnswer('experiencia','Avanzado','question3',25)">Avanzado</button>
         </div>
 
-        <!-- Pregunta 2 -->
+        <!-- Pregunta 2: Aprender desde fundamentos -->
         <div id="question2" class="question">
             <p>¿Te interesa aprender desde los fundamentos?</p>
-            <button class="primary" onclick="showRecommendation(['📚 Curso Power BI - De 0 a 100','📚 Curso de introducción a Power BI'])">Sí</button>
-            <button class="secondary" onclick="showRecommendation(['📚 Curso de Excel 365','📚 Curso de Introducción al análisis de datos'])">No</button>
+            <button class="primary" onclick="handleAnswer('fundamentos','Sí',null,50); showRecommendation(['📚 Power BI de 0 a 100','📚 Curso de introducción a Power BI'])">Sí</button>
+            <button class="secondary" onclick="handleAnswer('fundamentos','No',null,50); showRecommendation(['📚 Excel','📚 Introducción al análisis de datos'])">No</button>
         </div>
 
-        <!-- Pregunta 3 -->
+        <!-- Pregunta 3: Herramientas utilizadas -->
         <div id="question3" class="question">
             <p>¿Qué herramientas o tecnologías has utilizado previamente?</p>
-            <div class="checkbox-group">
+            <div class="checkbox-group" id="toolsCheckboxes">
                 <label><input type="checkbox" value="Power BI">Power BI</label>
-                <label><input type="checkbox" value="Excel/Google Sheets">Excel/Google Sheets</label>
+                <label><input type="checkbox" value="Power Query">Power Query</label>
+                <label><input type="checkbox" value="DAX">DAX</label>
+                <label><input type="checkbox" value="Visualización">Visualización</label>
                 <label><input type="checkbox" value="SQL">SQL</label>
                 <label><input type="checkbox" value="Python">Python</label>
-                <label><input type="checkbox" value="Tableau">Tableau</label>
-                <label><input type="checkbox" value="SharePoint">SharePoint</label>
+                <label><input type="checkbox" value="Excel/Google Sheets">Excel/Google Sheets</label>
             </div>
-            <button class="primary" onclick="showRecommendation(['📚 Curso de Power Query Esencial','📚 Curso de DAX'])">Continuar</button>
+            <button class="primary" onclick="handleToolsSelection(); handleAnswer('toolsSelected', userData.herramientas, 'question4', 50)">Continuar</button>
         </div>
 
-        <!-- Pregunta 4 -->
+        <!-- Pregunta 4: Tiempo diario de estudio -->
         <div id="question4" class="question">
-            <p>¿Cuáles son tus objetivos para los próximos meses?</p>
-            <button class="primary" onclick="showRecommendation(['📚 Curso de Modelado de datos en estrella con Power BI','📚 Curso PL-300 - Edición Año 2023'])">Dominar Power BI</button>
-            <button class="primary" onclick="showRecommendation(['📚 Curso de Gráficos imprescindibles para negocio en Power BI','📚 Curso de diseño creativo para informes con Figma'])">Visualización</button>
-            <button class="primary" onclick="showRecommendation(['📚 Curso de Lenguaje M Intermedio','📚 Curso de Construcción de una cuenta de Pérdidas y Ganancias con Power BI'])">Optimización y Finanzas</button>
+            <p>¿Cuántas horas al día puedes dedicar al estudio?</p>
+            <button class="primary" onclick="handleAnswer('tiempo','Menos de 1 hora','question5',75)">Menos de 1 hora</button>
+            <button class="primary" onclick="handleAnswer('tiempo','1-2 horas','question5',75)">1-2 horas</button>
+            <button class="primary" onclick="handleAnswer('tiempo','Más de 2 horas','question5',75)">Más de 2 horas</button>
+        </div>
+
+        <!-- Pregunta 5: Foco principal -->
+        <div id="question5" class="question">
+            <p>¿En qué aspecto de la analítica de datos quieres enfocarte?</p>
+            <button class="primary" onclick="handleAnswer('foco','Power BI',null,100); showRecommendation(['📚 Curso de DAX','📚 Visualizaciones imprescindibles para negocio'])">Power BI</button>
+            <button class="primary" onclick="handleAnswer('foco','SQL',null,100); showRecommendation(['📚 SQL','📚 Introducción a la estadística con Python'])">SQL</button>
+            <button class="primary" onclick="handleAnswer('foco','Análisis con Python',null,100); showRecommendation(['📚 Análisis con Python y Power BI','📚 Fundamentos del lenguaje M'])">Análisis con Python</button>
         </div>
 
         <!-- Recomendación final -->
         <div id="recommendation" class="question">
             <h2>Itinerario recomendado</h2>
             <div id="recommendation-list"></div>
+            <div id="personalized-message"></div>
             <button class="secondary" onclick="restart()">Volver a empezar</button>
             <button class="primary" onclick="exportToTxt()">Exportar a TXT</button>
         </div>
     </div>
 
     <script>
-        function handleAnswer(answer, nextStep, progress) {
-            document.querySelectorAll('.question').forEach(q => {
-                q.classList.remove('active');
-            });
-            document.getElementById(nextStep).classList.add('active');
+        const userData = {
+            experiencia: null,
+            fundamentos: null,
+            herramientas: [],
+            tiempo: null,
+            foco: null
+        };
+
+        function handleAnswer(key, value, nextStep, progress) {
+            userData[key] = value;
+            document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+            if (nextStep) {
+                document.getElementById(nextStep).classList.add('active');
+            }
             updateProgress(progress);
+        }
+
+        function handleToolsSelection() {
+            const checkboxes = document.querySelectorAll('#toolsCheckboxes input[type="checkbox"]');
+            const selectedTools = [];
+            checkboxes.forEach(chk => {
+                if(chk.checked) selectedTools.push(chk.value);
+            });
+            userData.herramientas = selectedTools;
         }
 
         function showRecommendation(courses) {
@@ -210,19 +243,69 @@
                 list.appendChild(p);
             });
 
-            updateProgress(100);
+            // Crear mensaje personalizado
+            const message = buildPersonalizedMessage(userData, courses);
+            const msgDiv = document.getElementById('personalized-message');
+            msgDiv.innerText = message;
+        }
+
+        function buildPersonalizedMessage(data, courses) {
+            // Ejemplo de lógica simple para un mensaje personalizado
+            // Se pueden agregar más condiciones en función de las respuestas
+            let texto = "Dado que ";
+
+            // Enfoque en experiencia
+            if(data.experiencia) {
+                texto += "tienes experiencia " + data.experiencia.toLowerCase() + " en análisis de datos, ";
+            }
+
+            // Herramientas conocidas
+            if(data.herramientas.length > 0) {
+                texto += "ya manejas " + data.herramientas.join(", ") + ", ";
+            } else {
+                texto += "no tienes experiencia previa en herramientas específicas, ";
+            }
+
+            // Tiempo dedicado
+            if(data.tiempo) {
+                texto += "puedes dedicar " + data.tiempo.toLowerCase() + " al día al estudio, ";
+            }
+
+            // Foco
+            if(data.foco) {
+                texto += "y quieres enfocarte en " + data.foco + ", ";
+            }
+
+            texto += "te recomendamos estos cursos para continuar tu desarrollo:";
+
+            // Añadimos el listado de cursos recomendados al texto si es necesario
+            // (Ya está visualmente en pantalla, el texto es solo una intro)
+            // Podríamos añadir más lógica para explicar por qué esos cursos se ajustan a las necesidades detectadas.
+
+            return texto;
         }
 
         function restart() {
             document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
             document.getElementById('question1').classList.add('active');
             updateProgress(0);
+            // Reiniciar datos
+            userData.experiencia = null;
+            userData.fundamentos = null;
+            userData.herramientas = [];
+            userData.tiempo = null;
+            userData.foco = null;
+            document.getElementById('recommendation-list').innerHTML = '';
+            document.getElementById('personalized-message').innerText = '';
+            const checkboxes = document.querySelectorAll('#toolsCheckboxes input[type="checkbox"]');
+            checkboxes.forEach(chk => chk.checked = false);
         }
 
         function exportToTxt() {
             const list = document.getElementById('recommendation-list');
             const courses = Array.from(list.children).map(p => p.innerText).join('\n');
-            const blob = new Blob([courses], { type: 'text/plain' });
+            const message = document.getElementById('personalized-message').innerText;
+            const blob = new Blob([message + "\n\n" + courses], { type: 'text/plain' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = 'itinerario.txt';
