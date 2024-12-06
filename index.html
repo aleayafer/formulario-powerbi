@@ -139,7 +139,8 @@
         <div id="recommendation" class="question">
             <h2>Itinerario recomendado</h2>
             <ul id="recommendation-list"></ul>
-            <p>¡Esperamos que estos cursos sean útiles para ti!</p>
+            <button class="secondary" onclick="restart()">Volver a empezar</button>
+            <button class="primary" onclick="exportToTxt()">Exportar a TXT</button>
         </div>
     </div>
 
@@ -161,6 +162,21 @@
                 li.innerText = course;
                 list.appendChild(li);
             });
+        }
+
+        function restart() {
+            document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+            document.getElementById('question1').classList.add('active');
+        }
+
+        function exportToTxt() {
+            const list = document.getElementById('recommendation-list');
+            const courses = Array.from(list.children).map(li => li.innerText).join('\n');
+            const blob = new Blob([courses], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'itinerario.txt';
+            link.click();
         }
     </script>
 </body>
