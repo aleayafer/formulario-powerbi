@@ -1,36 +1,62 @@
-Instrucciones para el formulario modular de analítica de datos
-Estructura de archivos
+# Formulario Modular de Analítica de Datos
 
-index.html: Punto de entrada del formulario.
-style.css: Estilos y apariencia visual.
-questions.js: Configuración de las preguntas, opciones y flujo del cuestionario.
-recommendations.js: Lógica de recomendaciones finales basadas en las respuestas del usuario.
-app.js: Lógica principal para renderizar preguntas, capturar respuestas y mostrar resultados.
-Cómo ejecutar
+Este repositorio contiene un formulario interactivo para segmentar estudiantes y recomendar cursos en analítica de datos. Incluye lógica modular para personalizar preguntas, diseño y recomendaciones.
 
-Coloca todos los archivos en el mismo directorio de tu repositorio.
-Abre index.html en tu navegador para ver el formulario en funcionamiento.
-Cómo modificar las preguntas
+## Estructura de Archivos
+- **`index.html`**: Punto de entrada del formulario.
+- **`style.css`**: Estilos y apariencia visual.
+- **`questions.js`**: Configuración de las preguntas, opciones y flujo del cuestionario.
+- **`recommendations.js`**: Lógica para generar recomendaciones finales basadas en las respuestas del usuario.
+- **`app.js`**: Lógica principal para renderizar preguntas, capturar respuestas y mostrar resultados.
 
-Abre questions.js.
-Añade, elimina o edita las preguntas y opciones en el objeto cuestionario.
-Cada pregunta tiene un texto, un conjunto de opciones (con texto, valor, next y progreso).
-next indica la siguiente pregunta o showFinalRec para mostrar el resultado final.
-Cómo cambiar el diseño
+---
 
-Abre style.css.
-Ajusta colores, fuentes, tamaños y márgenes para cambiar el aspecto visual del formulario.
-Cómo adaptar las recomendaciones
+## Cómo Ejecutar
+1. Coloca todos los archivos en el mismo directorio de tu repositorio.
+2. Abre `index.html` en tu navegador para probar el formulario en funcionamiento.
 
-Abre recommendations.js.
-Modifica la función getRecommendations(userData) para ajustar la lógica que determina qué cursos se recomiendan según las respuestas del usuario.
-Ajusta la función buildPersonalizedMessage(userData, courses) para personalizar el mensaje final.
-Cómo ampliar la lógica del formulario
+---
 
-En app.js se gestiona el flujo principal y el renderizado dinámico.
-Si necesitas cambiar la forma en que se navega entre preguntas o se muestran las recomendaciones, ajusta las funciones renderQuestion(), showFinalRecommendations() y updateProgress().
-Publicar el formulario
+## Cómo Modificar las Preguntas
+1. Abre el archivo **`questions.js`**.
+2. Añade, edita o elimina preguntas y opciones en el objeto del cuestionario.  
+   - Cada pregunta contiene:
+     - **Texto**: El contenido visible de la pregunta.
+     - **Opciones**: Respuestas asociadas con:
+       - **Texto**: Etiqueta visible de la opción.
+       - **Valor**: Datos asociados a la respuesta.
+       - **Next**: La siguiente pregunta o `showFinalRec` para finalizar.
+       - **Progreso**: Porcentaje de avance asociado.
 
-Sube el contenido del repositorio a GitHub Pages o a tu servidor web.
-Si usas GitHub Pages, asegúrate de tener activada la opción en la configuración del repositorio.
-Accede a la URL pública para compartir el formulario.
+---
+
+## Cómo Cambiar el Diseño
+1. Abre el archivo **`style.css`**.
+2. Ajusta los estilos para personalizar colores, fuentes, tamaños y márgenes según tus necesidades.
+
+---
+
+## Cómo Adaptar las Recomendaciones
+1. Abre el archivo **`recommendations.js`**.
+2. Edita la función `getRecommendations(userData)` para ajustar la lógica de recomendaciones basada en las respuestas del usuario.
+3. Personaliza el mensaje final en la función `buildPersonalizedMessage(userData, courses)`.
+
+---
+
+## Cómo Ampliar la Lógica del Formulario
+1. Abre el archivo **`app.js`**.
+2. Personaliza el flujo principal y el renderizado dinámico del formulario:
+   - **`renderQuestion()`**: Genera preguntas dinámicamente en la pantalla.
+   - **`showFinalRecommendations()`**: Muestra los resultados finales al usuario.
+   - **`updateProgress()`**: Actualiza la barra de progreso durante el cuestionario.
+
+---
+
+## Publicar el Formulario
+1. Sube los archivos a tu repositorio y activa **GitHub Pages** en la configuración del repositorio.
+2. Si utilizas un servidor web propio, sube todos los archivos al directorio raíz.
+3. Accede a la URL pública generada para compartir el formulario.
+
+---
+
+¡Contribuciones y mejoras son bienvenidas! Si tienes sugerencias o encuentras errores, por favor crea un **issue** o envía un **pull request**.
