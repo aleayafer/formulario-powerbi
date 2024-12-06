@@ -114,6 +114,14 @@
             color: #074983;
         }
 
+        #personalized-message {
+            background-color: #EBF2FA;
+            padding: 10px;
+            border-radius: 10px;
+            color: #074983;
+            margin-top: 20px;
+        }
+
         .checkbox-group {
             text-align: left;
             margin: 20px 0;
@@ -125,16 +133,8 @@
             cursor: pointer;
         }
 
-        .checkbox-group input[type="checkbox"] {
+        .checkbox-group input[type="radio"] {
             margin-right: 10px;
-        }
-
-        #personalized-message {
-            background-color: #EBF2FA;
-            padding: 10px;
-            border-radius: 10px;
-            color: #074983;
-            margin-top: 20px;
         }
     </style>
 </head>
@@ -146,51 +146,52 @@
 
         <h1>Encuesta de Analítica de Datos</h1>
 
-        <!-- Pregunta 1: Nivel de experiencia -->
+        <!-- Pregunta 1: Rol o contexto profesional -->
         <div id="question1" class="question active">
-            <p>¿Cuál es tu nivel de experiencia en herramientas de análisis de datos?</p>
-            <button class="primary" onclick="handleAnswer('experiencia','Ninguna experiencia','question2',25)">Ninguna experiencia</button>
-            <button class="primary" onclick="handleAnswer('experiencia','Básico','question2',25)">Básico</button>
-            <button class="primary" onclick="handleAnswer('experiencia','Intermedio','question3',25)">Intermedio</button>
-            <button class="primary" onclick="handleAnswer('experiencia','Avanzado','question3',25)">Avanzado</button>
+            <p>¿En qué contexto profesional te desenvuelves habitualmente?</p>
+            <button class="primary" onclick="handleAnswer('rol','Analista de datos','question2',20)">👤 Analista de datos</button>
+            <button class="primary" onclick="handleAnswer('rol','Responsable de negocio','question2',20)">👤 Responsable de negocio</button>
+            <button class="primary" onclick="handleAnswer('rol','Marketing o Ventas','question2',20)">👤 Marketing o Ventas</button>
+            <button class="primary" onclick="handleAnswer('rol','Consultor o Freelance','question2',20)">👤 Consultor o Freelance</button>
+            <button class="primary" onclick="handleAnswer('rol','Otro ámbito','question2',20)">👤 Otro ámbito</button>
         </div>
 
-        <!-- Pregunta 2: Aprender desde fundamentos -->
+        <!-- Pregunta 2: Tipo de proyectos -->
         <div id="question2" class="question">
-            <p>¿Te interesa aprender desde los fundamentos?</p>
-            <button class="primary" onclick="handleAnswer('fundamentos','Sí',null,50); showRecommendation(['📚 Power BI de 0 a 100','📚 Curso de introducción a Power BI'])">Sí</button>
-            <button class="secondary" onclick="handleAnswer('fundamentos','No',null,50); showRecommendation(['📚 Excel','📚 Introducción al análisis de datos'])">No</button>
+            <p>¿Qué tipo de proyectos o informes deseas crear con estas herramientas?</p>
+            <button class="primary" onclick="handleAnswer('proyecto','Informes financieros','question3',40)">💼 Informes financieros</button>
+            <button class="primary" onclick="handleAnswer('proyecto','Dashboards de ventas','question3',40)">📊 Dashboards de ventas</button>
+            <button class="primary" onclick="handleAnswer('proyecto','Análisis de marketing','question3',40)">📈 Análisis de marketing</button>
+            <button class="primary" onclick="handleAnswer('proyecto','Optimizar procesos internos','question3',40)">⚙️ Optimizar procesos</button>
+            <button class="primary" onclick="handleAnswer('proyecto','Otro tipo de análisis','question3',40)">🔍 Otro tipo de análisis</button>
         </div>
 
-        <!-- Pregunta 3: Herramientas utilizadas -->
+        <!-- Pregunta 3: Principal desafío -->
         <div id="question3" class="question">
-            <p>¿Qué herramientas o tecnologías has utilizado previamente?</p>
-            <div class="checkbox-group" id="toolsCheckboxes">
-                <label><input type="checkbox" value="Power BI">Power BI</label>
-                <label><input type="checkbox" value="Power Query">Power Query</label>
-                <label><input type="checkbox" value="DAX">DAX</label>
-                <label><input type="checkbox" value="Visualización">Visualización</label>
-                <label><input type="checkbox" value="SQL">SQL</label>
-                <label><input type="checkbox" value="Python">Python</label>
-                <label><input type="checkbox" value="Excel/Google Sheets">Excel/Google Sheets</label>
-            </div>
-            <button class="primary" onclick="handleToolsSelection(); handleAnswer('toolsSelected', userData.herramientas, 'question4', 50)">Continuar</button>
+            <p>¿Cuál consideras que es tu mayor desafío al trabajar con datos?</p>
+            <button class="primary" onclick="handleAnswer('desafio','Limpieza y preparación de datos','question4',60)">🧼 Limpieza de datos</button>
+            <button class="primary" onclick="handleAnswer('desafio','Modelado del conjunto de datos','question4',60)">🔧 Modelado</button>
+            <button class="primary" onclick="handleAnswer('desafio','Cálculos avanzados (DAX)','question4',60)">🧮 Cálculos avanzados</button>
+            <button class="primary" onclick="handleAnswer('desafio','Creación de visualizaciones claras','question4',60)">🎨 Visualización</button>
+            <button class="primary" onclick="handleAnswer('desafio','Contar historias con los datos (Storytelling)','question4',60)">📚 Storytelling</button>
         </div>
 
-        <!-- Pregunta 4: Tiempo diario de estudio -->
+        <!-- Pregunta 4: Tiempo disponible -->
         <div id="question4" class="question">
-            <p>¿Cuántas horas al día puedes dedicar al estudio?</p>
-            <button class="primary" onclick="handleAnswer('tiempo','Menos de 1 hora','question5',75)">Menos de 1 hora</button>
-            <button class="primary" onclick="handleAnswer('tiempo','1-2 horas','question5',75)">1-2 horas</button>
-            <button class="primary" onclick="handleAnswer('tiempo','Más de 2 horas','question5',75)">Más de 2 horas</button>
+            <p>¿Cuánto tiempo a la semana puedes dedicar a aprender nuevas habilidades?</p>
+            <button class="primary" onclick="handleAnswer('tiempo','Menos de 2 horas','question5',80)">⏰ Menos de 2 horas</button>
+            <button class="primary" onclick="handleAnswer('tiempo','Entre 2 y 5 horas','question5',80)">⏰ Entre 2 y 5 horas</button>
+            <button class="primary" onclick="handleAnswer('tiempo','Más de 5 horas','question5',80)">⏰ Más de 5 horas</button>
         </div>
 
-        <!-- Pregunta 5: Foco principal -->
+        <!-- Pregunta 5: Objetivo principal -->
         <div id="question5" class="question">
-            <p>¿En qué aspecto de la analítica de datos quieres enfocarte?</p>
-            <button class="primary" onclick="handleAnswer('foco','Power BI',null,100); showRecommendation(['📚 Curso de DAX','📚 Visualizaciones imprescindibles para negocio'])">Power BI</button>
-            <button class="primary" onclick="handleAnswer('foco','SQL',null,100); showRecommendation(['📚 SQL','📚 Introducción a la estadística con Python'])">SQL</button>
-            <button class="primary" onclick="handleAnswer('foco','Análisis con Python',null,100); showRecommendation(['📚 Análisis con Python y Power BI','📚 Fundamentos del lenguaje M'])">Análisis con Python</button>
+            <p>¿Cuál es tu objetivo principal al formarte en análisis de datos?</p>
+            <button class="primary" onclick="handleAnswer('objetivo','Obtener certificación (PL-300)','showFinalRec',100)">🎓 Certificación PL-300</button>
+            <button class="primary" onclick="handleAnswer('objetivo','Mejorar la calidad de mis informes','showFinalRec',100)">🌟 Mejorar informes</button>
+            <button class="primary" onclick="handleAnswer('objetivo','Aplicar técnicas avanzadas (DAX, visualización)','showFinalRec',100)">🚀 Técnicas avanzadas</button>
+            <button class="primary" onclick="handleAnswer('objetivo','Optimizar procesos internos de mi empresa','showFinalRec',100)">📂 Optimizar procesos</button>
+            <button class="primary" onclick="handleAnswer('objetivo','Crear proyectos personales y experimentar','showFinalRec',100)">🎨 Proyectos personales</button>
         </div>
 
         <!-- Recomendación final -->
@@ -205,82 +206,79 @@
 
     <script>
         const userData = {
-            experiencia: null,
-            fundamentos: null,
-            herramientas: [],
+            rol: null,
+            proyecto: null,
+            desafio: null,
             tiempo: null,
-            foco: null
+            objetivo: null
         };
 
         function handleAnswer(key, value, nextStep, progress) {
             userData[key] = value;
             document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
-            if (nextStep) {
+            if (nextStep && nextStep !== 'showFinalRec') {
                 document.getElementById(nextStep).classList.add('active');
+            } else if (nextStep === 'showFinalRec') {
+                showFinalRecommendations();
             }
             updateProgress(progress);
         }
 
-        function handleToolsSelection() {
-            const checkboxes = document.querySelectorAll('#toolsCheckboxes input[type="checkbox"]');
-            const selectedTools = [];
-            checkboxes.forEach(chk => {
-                if(chk.checked) selectedTools.push(chk.value);
-            });
-            userData.herramientas = selectedTools;
-        }
-
-        function showRecommendation(courses) {
+        function showFinalRecommendations() {
             document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
             const recommendationDiv = document.getElementById('recommendation');
             recommendationDiv.classList.add('active');
 
+            // Lógica simple de recomendación: Combinar las respuestas para sugerir cursos
+            // Esta lógica puede ser mucho más compleja. Aquí se hace un ejemplo básico.
+            let recommendedCourses = [];
+            
+            // Ejemplo de lógica: Si el desafío es DAX y el objetivo es técnicas avanzadas
+            if(userData.desafio === 'Cálculos avanzados (DAX)' && userData.objetivo === 'Aplicar técnicas avanzadas (DAX, visualización)') {
+                recommendedCourses.push('📚 Curso de DAX');
+                recommendedCourses.push('📚 Visualizaciones imprescindibles para negocio');
+            } else if(userData.objetivo === 'Obtener certificación (PL-300)') {
+                recommendedCourses.push('📚 Preparatorio para la certificación PL-300');
+                if(userData.desafio === 'Limpieza y preparación de datos' || userData.desafio === 'Modelado del conjunto de datos') {
+                    recommendedCourses.push('📚 Power BI de 0 a 100');
+                }
+            } else if(userData.objetivo === 'Mejorar la calidad de mis informes') {
+                recommendedCourses.push('📚 Visualizaciones imprescindibles para negocio');
+                if(userData.desafio === 'Modelado del conjunto de datos') {
+                    recommendedCourses.push('📚 Modelado de Datos en Power BI');
+                }
+            } else if(userData.objetivo === 'Optimizar procesos internos de mi empresa') {
+                recommendedCourses.push('📚 Fundamentos del lenguaje M');
+                recommendedCourses.push('📚 Bravo para Power BI');
+            } else if(userData.objetivo === 'Crear proyectos personales y experimentar') {
+                recommendedCourses.push('📚 Introducción al análisis de datos');
+                if(userData.desafio === 'Creación de visualizaciones claras') {
+                    recommendedCourses.push('📚 Visualizaciones imprescindibles para negocio');
+                }
+            }
+
+            // Mostrar las recomendaciones
             const list = document.getElementById('recommendation-list');
             list.innerHTML = '';
-            courses.forEach(course => {
+            recommendedCourses.forEach(course => {
                 const p = document.createElement('p');
                 p.innerText = course;
                 list.appendChild(p);
             });
 
-            // Crear mensaje personalizado
-            const message = buildPersonalizedMessage(userData, courses);
+            // Mensaje personalizado
             const msgDiv = document.getElementById('personalized-message');
+            const message = buildPersonalizedMessage(userData, recommendedCourses);
             msgDiv.innerText = message;
         }
 
         function buildPersonalizedMessage(data, courses) {
-            // Ejemplo de lógica simple para un mensaje personalizado
-            // Se pueden agregar más condiciones en función de las respuestas
-            let texto = "Dado que ";
-
-            // Enfoque en experiencia
-            if(data.experiencia) {
-                texto += "tienes experiencia " + data.experiencia.toLowerCase() + " en análisis de datos, ";
-            }
-
-            // Herramientas conocidas
-            if(data.herramientas.length > 0) {
-                texto += "ya manejas " + data.herramientas.join(", ") + ", ";
-            } else {
-                texto += "no tienes experiencia previa en herramientas específicas, ";
-            }
-
-            // Tiempo dedicado
-            if(data.tiempo) {
-                texto += "puedes dedicar " + data.tiempo.toLowerCase() + " al día al estudio, ";
-            }
-
-            // Foco
-            if(data.foco) {
-                texto += "y quieres enfocarte en " + data.foco + ", ";
-            }
-
-            texto += "te recomendamos estos cursos para continuar tu desarrollo:";
-
-            // Añadimos el listado de cursos recomendados al texto si es necesario
-            // (Ya está visualmente en pantalla, el texto es solo una intro)
-            // Podríamos añadir más lógica para explicar por qué esos cursos se ajustan a las necesidades detectadas.
+            let texto = "Teniendo en cuenta que te desenvuelves como " + data.rol.toLowerCase();
+            texto += " y quieres trabajar en " + data.proyecto.toLowerCase();
+            texto += ", tu principal reto radica en " + data.desafio.toLowerCase();
+            texto += ". Dado que puedes dedicar " + data.tiempo.toLowerCase() + " a la semana";
+            texto += " y tu objetivo es " + data.objetivo.toLowerCase() + ",";
+            texto += " creemos que estos cursos se ajustarán a lo que necesitas para avanzar.";
 
             return texto;
         }
@@ -289,16 +287,13 @@
             document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
             document.getElementById('question1').classList.add('active');
             updateProgress(0);
-            // Reiniciar datos
-            userData.experiencia = null;
-            userData.fundamentos = null;
-            userData.herramientas = [];
+            userData.rol = null;
+            userData.proyecto = null;
+            userData.desafio = null;
             userData.tiempo = null;
-            userData.foco = null;
+            userData.objetivo = null;
             document.getElementById('recommendation-list').innerHTML = '';
             document.getElementById('personalized-message').innerText = '';
-            const checkboxes = document.querySelectorAll('#toolsCheckboxes input[type="checkbox"]');
-            checkboxes.forEach(chk => chk.checked = false);
         }
 
         function exportToTxt() {
