@@ -59,10 +59,11 @@ Este repositorio contiene un formulario interactivo para segmentar estudiantes y
 
 ---
 
-¡Contribuciones y mejoras son bienvenidas! Si tienes sugerencias o encuentras errores, por favor crea un **issue** o envía un **pull request**.
 
 
 
+
+## Prompt IA
 Dispongo de un formulario modular que recomienda itinerarios formativos basados en las respuestas del usuario. Está dividido en estos archivos:
 
 • index.html (punto de entrada)
