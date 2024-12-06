@@ -3,42 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encuesta de Power BI y Analítica de Datos</title>
+    <title>Encuesta de Analítica de Datos</title>
     <style>
+        /* Estilos globales */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Montserrat', sans-serif;
             margin: 20px;
+            background-color: #FAF9F9; /* Fondo de la página */
+            color: #074983; /* Texto principal */
         }
+
         .container {
             max-width: 600px;
             margin: auto;
             text-align: center;
+            background-color: #FFFFFF; /* Fondo del contenedor */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
+        /* Encabezado */
+        h1 {
+            font-size: 36px;
+            font-weight: 500;
+            color: #E63946; /* Color de los encabezados */
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            font-weight: 400;
+            color: #074983;
+        }
+
+        /* Botones */
+        button {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border: 2px solid #074983;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button.primary {
+            background-color: #E63946; /* Fondo botón primario */
+            color: #FAF9F9; /* Texto botón primario */
+        }
+
+        button.secondary {
+            background-color: #FFFFFF; /* Fondo botón secundario */
+            color: #074983; /* Texto botón secundario */
+        }
+
+        button.primary:hover {
+            background-color: #C5303A; /* Hover botón primario */
+        }
+
+        button.secondary:hover {
+            background-color: #EBF2FA; /* Hover botón secundario */
+        }
+
+        /* Preguntas */
         .question {
             margin-bottom: 20px;
             display: none;
         }
+
         .question.active {
             display: block;
         }
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
+
+        /* Lista de recomendaciones */
+        ul {
+            list-style-type: none;
+            padding: 0;
         }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .recommendation {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-        .checkbox-group label {
-            display: block;
-            margin: 5px 0;
+
+        ul li {
+            background-color: #EBF2FA;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            color: #074983;
         }
     </style>
 </head>
@@ -49,17 +100,17 @@
         <!-- Pregunta 1 -->
         <div id="question1" class="question active">
             <p>¿Cuál es tu nivel de experiencia en herramientas de análisis de datos?</p>
-            <button onclick="handleAnswer('Ninguna experiencia', 'question2')">Ninguna experiencia</button>
-            <button onclick="handleAnswer('Básico', 'question2')">Básico</button>
-            <button onclick="handleAnswer('Intermedio', 'question3')">Intermedio</button>
-            <button onclick="handleAnswer('Avanzado', 'question3')">Avanzado</button>
+            <button class="primary" onclick="handleAnswer('Ninguna experiencia', 'question2')">Ninguna experiencia</button>
+            <button class="primary" onclick="handleAnswer('Básico', 'question2')">Básico</button>
+            <button class="primary" onclick="handleAnswer('Intermedio', 'question3')">Intermedio</button>
+            <button class="primary" onclick="handleAnswer('Avanzado', 'question3')">Avanzado</button>
         </div>
 
         <!-- Pregunta 2 -->
         <div id="question2" class="question">
             <p>¿Te interesa aprender desde los fundamentos?</p>
-            <button onclick="showRecommendation(['Curso Power BI - De 0 a 100', 'Curso de introducción a Power BI'])">Sí</button>
-            <button onclick="showRecommendation(['Curso de Excel 365', 'Curso de Introducción al análisis de datos'])">No</button>
+            <button class="primary" onclick="showRecommendation(['Curso Power BI - De 0 a 100', 'Curso de introducción a Power BI'])">Sí</button>
+            <button class="secondary" onclick="showRecommendation(['Curso de Excel 365', 'Curso de Introducción al análisis de datos'])">No</button>
         </div>
 
         <!-- Pregunta 3 -->
@@ -73,15 +124,15 @@
                 <label><input type="checkbox" value="Tableau"> Tableau</label>
                 <label><input type="checkbox" value="SharePoint"> SharePoint</label>
             </div>
-            <button onclick="showRecommendation(['Curso de Power Query Esencial', 'Curso de DAX'])">Continuar</button>
+            <button class="primary" onclick="showRecommendation(['Curso de Power Query Esencial', 'Curso de DAX'])">Continuar</button>
         </div>
 
         <!-- Pregunta 4 -->
         <div id="question4" class="question">
             <p>¿Cuáles son tus objetivos específicos para los próximos 6-12 meses?</p>
-            <button onclick="showRecommendation(['Curso de Modelado de datos en estrella con Power BI', 'Curso PL-300 - Edición Año 2023'])">Dominar Power BI</button>
-            <button onclick="showRecommendation(['Curso de Gráficos imprescindibles para negocio en Power BI', 'Curso de diseño creativo para informes con Figma'])">Visualización y Storytelling</button>
-            <button onclick="showRecommendation(['Curso de Lenguaje M Intermedio', 'Curso de Construcción de una cuenta de Pérdidas y Ganancias con Power BI'])">Optimización y Finanzas</button>
+            <button class="primary" onclick="showRecommendation(['Curso de Modelado de datos en estrella con Power BI', 'Curso PL-300 - Edición Año 2023'])">Dominar Power BI</button>
+            <button class="primary" onclick="showRecommendation(['Curso de Gráficos imprescindibles para negocio en Power BI', 'Curso de diseño creativo para informes con Figma'])">Visualización y Storytelling</button>
+            <button class="primary" onclick="showRecommendation(['Curso de Lenguaje M Intermedio', 'Curso de Construcción de una cuenta de Pérdidas y Ganancias con Power BI'])">Optimización y Finanzas</button>
         </div>
 
         <!-- Recomendación final -->
@@ -94,54 +145,21 @@
 
     <script>
         function handleAnswer(answer, nextStep) {
-            // Oculta todas las preguntas
             document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
-            // Muestra la siguiente pregunta
             document.getElementById(nextStep).classList.add('active');
-
-            // Envía la respuesta a Google Apps Script
-            fetch('https://script.google.com/macros/s/AKfycbwydZSlcctofkI1i7S_0CqFIVau5v_gVPEjukbG1jAbX39eZMxpBFCXGwrwVC-1rDYC/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ respuesta: answer })
-            }).then(() => {
-                console.log('Respuesta enviada: ' + answer);
-            }).catch((error) => {
-                console.error('Error al enviar la respuesta:', error);
-            });
         }
 
         function showRecommendation(courses) {
-            // Oculta todas las preguntas
             document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
-            // Muestra la sección de recomendación
             const recommendationDiv = document.getElementById('recommendation');
             recommendationDiv.classList.add('active');
 
-            // Muestra los cursos recomendados
             const list = document.getElementById('recommendation-list');
             list.innerHTML = '';
             courses.forEach(course => {
                 const li = document.createElement('li');
                 li.innerText = course;
                 list.appendChild(li);
-            });
-
-            // Envía la recomendación a Google Apps Script
-            fetch('https://script.google.com/macros/s/AKfycbwydZSlcctofkI1i7S_0CqFIVau5v_gVPEjukbG1jAbX39eZMxpBFCXGwrwVC-1rDYC/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ recomendacion: courses })
-            }).then(() => {
-                console.log('Recomendación enviada:', courses);
-            }).catch((error) => {
-                console.error('Error al enviar la recomendación:', error);
             });
         }
     </script>
