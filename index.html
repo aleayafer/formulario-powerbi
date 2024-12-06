@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encuesta de Power BI</title>
+    <title>Encuesta de Power BI y Analítica de Datos</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -36,41 +36,52 @@
             margin-top: 20px;
             font-weight: bold;
         }
+        .checkbox-group label {
+            display: block;
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Encuesta de Power BI</h1>
+        <h1>Encuesta de Analítica de Datos</h1>
 
         <!-- Pregunta 1 -->
         <div id="question1" class="question active">
-            <p>¿Cuál es tu nivel actual en Power BI?</p>
-            <button onclick="handleAnswer('principiante', 'question2')">Principiante</button>
-            <button onclick="handleAnswer('intermedio', 'question3')">Intermedio</button>
-            <button onclick="handleAnswer('avanzado', 'question4')">Avanzado</button>
+            <p>¿Cuál es tu nivel de experiencia en herramientas de análisis de datos?</p>
+            <button onclick="handleAnswer('Ninguna experiencia', 'question2')">Ninguna experiencia</button>
+            <button onclick="handleAnswer('Básico', 'question2')">Básico</button>
+            <button onclick="handleAnswer('Intermedio', 'question3')">Intermedio</button>
+            <button onclick="handleAnswer('Avanzado', 'question3')">Avanzado</button>
         </div>
 
         <!-- Pregunta 2 -->
         <div id="question2" class="question">
-            <p>¿Te interesa aprender los fundamentos de Power BI?</p>
+            <p>¿Te interesa aprender desde los fundamentos?</p>
             <button onclick="showRecommendation(['Curso Power BI - De 0 a 100', 'Curso de introducción a Power BI'])">Sí</button>
-            <button onclick="showRecommendation(['Curso de Power Query Esencial'])">No</button>
+            <button onclick="showRecommendation(['Curso de Excel 365', 'Curso de Introducción al análisis de datos'])">No</button>
         </div>
 
         <!-- Pregunta 3 -->
         <div id="question3" class="question">
-            <p>¿Qué área te interesa mejorar en Power BI?</p>
-            <button onclick="showRecommendation(['Curso de DAX', 'Curso de Modelado de datos con Power BI'])">Modelado y cálculos</button>
-            <button onclick="showRecommendation(['Curso de Gráficos imprescindibles para negocio en Power BI', 'Curso de diseño creativo para informes con Figma'])">Visualización</button>
-            <button onclick="showRecommendation(['Curso de Fundamentos del lenguaje M'])">Optimización de datos</button>
+            <p>¿Qué herramientas o tecnologías has utilizado previamente? (Selecciona todas las que correspondan)</p>
+            <div class="checkbox-group">
+                <label><input type="checkbox" value="Power BI"> Power BI</label>
+                <label><input type="checkbox" value="Excel/Google Sheets"> Excel/Google Sheets</label>
+                <label><input type="checkbox" value="SQL"> SQL</label>
+                <label><input type="checkbox" value="Python"> Python</label>
+                <label><input type="checkbox" value="Tableau"> Tableau</label>
+                <label><input type="checkbox" value="SharePoint"> SharePoint</label>
+            </div>
+            <button onclick="showRecommendation(['Curso de Power Query Esencial', 'Curso de DAX'])">Continuar</button>
         </div>
 
         <!-- Pregunta 4 -->
         <div id="question4" class="question">
-            <p>¿Qué especialización avanzada prefieres en Power BI?</p>
-            <button onclick="showRecommendation(['Curso PL-300 - Edición Año 2023', 'Curso de Modelado de datos en estrella con Power BI'])">Certificación y modelado avanzado</button>
-            <button onclick="showRecommendation(['Curso de Balance Financiero con Power BI', 'Curso de Construcción de una cuenta de Pérdidas y Ganancias con Power BI'])">Finanzas</button>
-            <button onclick="showRecommendation(['Curso de Bravo para Power BI', 'Curso de Lenguaje M Intermedio'])">Optimización avanzada</button>
+            <p>¿Cuáles son tus objetivos específicos para los próximos 6-12 meses?</p>
+            <button onclick="showRecommendation(['Curso de Modelado de datos en estrella con Power BI', 'Curso PL-300 - Edición Año 2023'])">Dominar Power BI</button>
+            <button onclick="showRecommendation(['Curso de Gráficos imprescindibles para negocio en Power BI', 'Curso de diseño creativo para informes con Figma'])">Visualización y Storytelling</button>
+            <button onclick="showRecommendation(['Curso de Lenguaje M Intermedio', 'Curso de Construcción de una cuenta de Pérdidas y Ganancias con Power BI'])">Optimización y Finanzas</button>
         </div>
 
         <!-- Recomendación final -->
