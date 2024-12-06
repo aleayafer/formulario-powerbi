@@ -10,7 +10,7 @@
             margin: 20px;
         }
         .container {
-            max-width: 400px;
+            max-width: 600px;
             margin: auto;
             text-align: center;
         }
@@ -41,42 +41,53 @@
 <body>
     <div class="container">
         <h1>Encuesta de Power BI</h1>
-        
+
         <!-- Pregunta 1 -->
         <div id="question1" class="question active">
-            <p>¿Actualmente trabajas con Power BI?</p>
-            <button onclick="handleAnswer('Sí', 'question2')">Sí</button>
-            <button onclick="handleAnswer('No', 'question3')">No</button>
+            <p>¿Cuál es tu nivel actual en Power BI?</p>
+            <button onclick="handleAnswer('principiante', 'question2')">Principiante</button>
+            <button onclick="handleAnswer('intermedio', 'question3')">Intermedio</button>
+            <button onclick="handleAnswer('avanzado', 'question4')">Avanzado</button>
         </div>
 
         <!-- Pregunta 2 -->
         <div id="question2" class="question">
-            <p>¿Tienes experiencia creando modelos de datos en Power BI?</p>
-            <button onclick="handleAnswer('Sí', 'question4')">Sí</button>
-            <button onclick="handleAnswer('No', 'recommendation', 'Curso recomendado: Introducción a Modelado de Datos')">No</button>
+            <p>¿Te interesa aprender los fundamentos de Power BI?</p>
+            <button onclick="showRecommendation(['Curso Power BI - De 0 a 100', 'Curso de introducción a Power BI'])">Sí</button>
+            <button onclick="showRecommendation(['Curso de Power Query Esencial'])">No</button>
         </div>
 
         <!-- Pregunta 3 -->
         <div id="question3" class="question">
-            <p>¿Tienes experiencia con otras herramientas de análisis de datos?</p>
-            <button onclick="handleAnswer('Sí', 'recommendation', 'Curso recomendado: Power BI Intermedio')">Sí</button>
-            <button onclick="handleAnswer('No', 'recommendation', 'Curso recomendado: Power BI 0 a 100')">No</button>
+            <p>¿Qué área te interesa mejorar en Power BI?</p>
+            <button onclick="showRecommendation(['Curso de DAX', 'Curso de Modelado de datos con Power BI'])">Modelado y cálculos</button>
+            <button onclick="showRecommendation(['Curso de Gráficos imprescindibles para negocio en Power BI', 'Curso de diseño creativo para informes con Figma'])">Visualización</button>
+            <button onclick="showRecommendation(['Curso de Fundamentos del lenguaje M'])">Optimización de datos</button>
         </div>
 
         <!-- Pregunta 4 -->
         <div id="question4" class="question">
-            <p>¿Conoces funciones DAX avanzadas (como CALCULATE o FILTER)?</p>
-            <button onclick="handleAnswer('Sí', 'recommendation', 'Curso recomendado: DAX Avanzado')">Sí</button>
-            <button onclick="handleAnswer('No', 'recommendation', 'Curso recomendado: DAX desde Cero')">No</button>
+            <p>¿Qué especialización avanzada prefieres en Power BI?</p>
+            <button onclick="showRecommendation(['Curso PL-300 - Edición Año 2023', 'Curso de Modelado de datos en estrella con Power BI'])">Certificación y modelado avanzado</button>
+            <button onclick="showRecommendation(['Curso de Balance Financiero con Power BI', 'Curso de Construcción de una cuenta de Pérdidas y Ganancias con Power BI'])">Finanzas</button>
+            <button onclick="showRecommendation(['Curso de Bravo para Power BI', 'Curso de Lenguaje M Intermedio'])">Optimización avanzada</button>
         </div>
 
-        <!-- Recomendación -->
+        <!-- Recomendación final -->
         <div id="recommendation" class="question">
-            <p class="recommendation"></p>
+            <h2>Itinerario recomendado</h2>
+            <ul id="recommendation-list"></ul>
+            <p>¡Esperamos que estos cursos sean útiles para ti!</p>
         </div>
     </div>
+
     <script>
-        function handleAnswer(answer, nextStep, recommendation = '') {
+        function handleAnswer(answer, nextStep) {
+            // Oculta todas las preguntas
+            document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+            // Muestra la siguiente pregunta
+            document.getElementById(nextStep).classList.add('active');
+
             // Envía la respuesta a Google Apps Script
             fetch('https://script.google.com/macros/s/AKfycbwydZSlcctofkI1i7S_0CqFIVau5v_gVPEjukbG1jAbX39eZMxpBFCXGwrwVC-1rDYC/exec', {
                 method: 'POST',
@@ -90,13 +101,37 @@
             }).catch((error) => {
                 console.error('Error al enviar la respuesta:', error);
             });
+        }
 
-            // Maneja la transición de preguntas
+        function showRecommendation(courses) {
+            // Oculta todas las preguntas
             document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
-            if (nextStep === 'recommendation') {
-                document.querySelector('#recommendation .recommendation').innerText = recommendation;
-            }
-            document.getElementById(nextStep).classList.add('active');
+            // Muestra la sección de recomendación
+            const recommendationDiv = document.getElementById('recommendation');
+            recommendationDiv.classList.add('active');
+
+            // Muestra los cursos recomendados
+            const list = document.getElementById('recommendation-list');
+            list.innerHTML = '';
+            courses.forEach(course => {
+                const li = document.createElement('li');
+                li.innerText = course;
+                list.appendChild(li);
+            });
+
+            // Envía la recomendación a Google Apps Script
+            fetch('https://script.google.com/macros/s/AKfycbwydZSlcctofkI1i7S_0CqFIVau5v_gVPEjukbG1jAbX39eZMxpBFCXGwrwVC-1rDYC/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ recomendacion: courses })
+            }).then(() => {
+                console.log('Recomendación enviada:', courses);
+            }).catch((error) => {
+                console.error('Error al enviar la recomendación:', error);
+            });
         }
     </script>
 </body>
