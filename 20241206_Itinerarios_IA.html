@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta de Power BI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .recommendation {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Encuesta de Power BI</h1>
+        <form id="survey-form">
+            <div class="question">
+                <p>¿Actualmente trabajas con Power BI?</p>
+                <label>
+                    <input type="radio" name="powerbi" value="Sí" required> Sí
+                </label>
+                <label>
+                    <input type="radio" name="powerbi" value="No" required> No
+                </label>
+            </div>
+            <button type="submit">Enviar</button>
+        </form>
+        <div id="recommendation" class="recommendation"></div>
+    </div>
+    <script>
+        document.getElementById('survey-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const answer = formData.get('powerbi');
+            let recommendation = '';
+            if (answer === 'Sí') {
+                recommendation = 'Te recomendamos el curso "PL300 de NamasData".';
+            } else {
+                recommendation = 'Te recomendamos el curso "Power BI 0 a 100".';
+            }
+            document.getElementById('recommendation').innerText = recommendation;
+
+            // Enviar datos a Google Apps Script
+            fetch('URhttps://script.google.com/macros/s/AKfycbwU8CmT67YWcHfNBZTgksJqe_Mrl2sFTShzUx9Xav-WRl7uSnTyuc15lId6BppXxinP/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ respuesta: answer })
+            });
+        });
+    </script>
+</body>
+</html>
