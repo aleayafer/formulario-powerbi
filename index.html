@@ -65,13 +65,17 @@
             document.getElementById('recommendation').innerText = recommendation;
 
             // Enviar datos a Google Apps Script
-            fetch('URhttps://script.google.com/macros/s/AKfycbwU8CmT67YWcHfNBZTgksJqe_Mrl2sFTShzUx9Xav-WRl7uSnTyuc15lId6BppXxinP/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbwydZSlcctofkI1i7S_0CqFIVau5v_gVPEjukbG1jAbX39eZMxpBFCXGwrwVC-1rDYC/exec', {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ respuesta: answer })
+            }).then(() => {
+                console.log('Respuesta enviada correctamente.');
+            }).catch((error) => {
+                console.error('Error al enviar la respuesta:', error);
             });
         });
     </script>
